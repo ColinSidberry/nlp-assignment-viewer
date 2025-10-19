@@ -1,0 +1,161 @@
+{
+  "metadata": {
+    "title": "Assignment 1: Prefix Expansion",
+    "training_goal": "Prefix Expansion",
+    "model_type": "computation",
+    "model_category": "Frequency-based Language Model",
+    "description": "Build an autocomplete system using frequency-based word rankings from Shakespeare text",
+    "notebook_path": "assignment_1.ipynb"
+  },
+  "ml_stages": [
+    {
+      "stage": "Data Preparation",
+      "stage_order": 1,
+      "description": "Loading, cleaning, and tokenizing raw text data",
+      "substages": [
+        {
+          "name": "Data Loading & Cleaning",
+          "cell_id": "c8a63d33",
+          "function_name": "read_vocabulary",
+          "line_numbers": {
+            "start": 6,
+            "end": 8
+          },
+          "code_snippet": "text = f.read().lower()\n# Remove punctuation/digits\ntext = re.sub(r\"[^a-z\\s]\", \"\", text)",
+          "description": "Load text file, convert to lowercase, remove punctuation and digits",
+          "operations": [
+            "File I/O",
+            "Lowercase normalization",
+            "Punctuation removal"
+          ]
+        },
+        {
+          "name": "Tokenization",
+          "cell_id": "c8a63d33",
+          "function_name": "read_vocabulary",
+          "line_numbers": {
+            "start": 9,
+            "end": 9
+          },
+          "code_snippet": "words = text.split()",
+          "description": "Split cleaned text into individual word tokens",
+          "operations": [
+            "Whitespace tokenization"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "Model Training",
+      "stage_order": 2,
+      "description": "Computing word frequencies and creating a frequency-sorted vocabulary (the 'model')",
+      "substages": [
+        {
+          "name": "Frequency Computation",
+          "cell_id": "c8a63d33",
+          "function_name": "read_vocabulary",
+          "line_numbers": {
+            "start": 10,
+            "end": 12
+          },
+          "code_snippet": "counter = Counter(words)\n# Sort by frequency (most common first)\nvocab = [word for word, _ in counter.most_common()]",
+          "description": "Count word occurrences and sort by frequency to create the model",
+          "operations": [
+            "Frequency counting (Counter)",
+            "Sorting by frequency",
+            "Vocabulary creation"
+          ],
+          "model_details": {
+            "type": "Frequency-based Language Model",
+            "parameters": "Word frequency distribution (no trainable parameters)",
+            "learning": false,
+            "note": "This IS the model - a frequency-sorted vocabulary that predicts likely completions"
+          }
+        }
+      ]
+    },
+    {
+      "stage": "Inference",
+      "stage_order": 3,
+      "description": "Using the trained model to make predictions (autocomplete)",
+      "substages": [
+        {
+          "name": "Autocomplete Prediction",
+          "cell_id": "8f88d040",
+          "function_name": "autocomplete_word",
+          "line_numbers": {
+            "start": 1,
+            "end": 4
+          },
+          "code_snippet": "def autocomplete_word(prefix, vocab):\n    results = [word for word in vocab if word.startswith(prefix)]\n    return results[:10]  # top 10",
+          "description": "Filter vocabulary by prefix and return top 10 most frequent matches",
+          "operations": [
+            "Prefix matching",
+            "Top-k selection",
+            "Prediction ranking by frequency"
+          ],
+          "inference_details": {
+            "note": "Inference doesn't require neural networks - just uses the model to make predictions",
+            "prediction_method": "Returns frequent words first based on model's frequency ranking"
+          }
+        }
+      ]
+    },
+    {
+      "stage": "Application/Demo",
+      "stage_order": 4,
+      "description": "Testing and interactive demonstration of the system",
+      "substages": [
+        {
+          "name": "Test Examples",
+          "cell_id": "790e9d15",
+          "function_name": null,
+          "line_numbers": {
+            "start": 1,
+            "end": 5
+          },
+          "code_snippet": "vocab = read_vocabulary(\"shakespeare-edit.txt\")\nprint(autocomplete_word(\"love\", vocab))\nprint(autocomplete_word(\"the\", vocab))\nprint(autocomplete_word(\"thou\", vocab))\nprint(autocomplete_word(\"rome\", vocab))",
+          "description": "Test autocomplete with various prefixes",
+          "operations": [
+            "Model loading",
+            "Batch inference testing"
+          ]
+        },
+        {
+          "name": "Interactive Widget",
+          "cell_id": "dff5f361",
+          "function_name": null,
+          "line_numbers": {
+            "start": 1,
+            "end": 26
+          },
+          "description": "Interactive UI for real-time autocomplete suggestions using ipywidgets",
+          "operations": [
+            "UI creation",
+            "Real-time inference",
+            "Event handling"
+          ]
+        }
+      ]
+    }
+  ],
+  "key_insights": [
+    {
+      "title": "Model Definition",
+      "content": "The 'model' is the frequency-sorted vocabulary - a computational approach without learned parameters"
+    },
+    {
+      "title": "Inference Without Neural Networks",
+      "content": "Inference simply means using your model to make predictions. Here, predictions come from frequency rankings."
+    },
+    {
+      "title": "Data → Model → Prediction Pipeline",
+      "content": "Clear three-stage pipeline: clean/tokenize data → count frequencies → filter by prefix"
+    }
+  ],
+  "dependencies": {
+    "standard_library": ["re", "collections.Counter"],
+    "jupyter": ["ipywidgets", "IPython.display"],
+    "data_files": ["shakespeare-edit.txt", "tiny.txt"]
+  }
+}

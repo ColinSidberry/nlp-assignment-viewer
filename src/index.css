@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Modern color palette inspired by Supabase */
+  --color-bg-primary: #0f1419;
+  --color-bg-secondary: #1a1f26;
+  --color-bg-tertiary: #242b33;
+  --color-border-primary: #2d3748;
+  --color-border-secondary: #1a202c;
+  --color-text-primary: #ededed;
+  --color-text-secondary: #a0aec0;
+  --color-text-tertiary: #718096;
+  --color-accent-primary: #10b981;
+  --color-accent-secondary: #3ecf8e;
+  --color-accent-hover: #059669;
+  --color-link: #3b82f6;
+  --color-link-hover: #2563eb;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Cell highlight animation */
+.cell-highlight {
+  animation: highlight 2s ease-in-out;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes highlight {
+  0% {
+    background-color: transparent;
+    border-color: inherit;
+  }
+  10% {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+  }
+  90% {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+  }
+  100% {
+    background-color: transparent;
+    border-color: inherit;
+  }
+}
+
+/* Jupyter notebook styling overrides for Thebe */
+.thebelab-cell {
+  margin-bottom: 1rem;
+}
+
+.thebelab-input {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+/* Thebe output styling - specific selectors only */
+.thebelab-output {
+  font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+  font-size: 0.875rem !important;
+  background-color: #0a0e12 !important;
+  color: #c9d1d9 !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-top: 1rem !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Jupyter output area specific */
+.jp-OutputArea,
+.jp-OutputArea-output {
+  background-color: #0a0e12 !important;
+  color: #c9d1d9 !important;
+}
+
+/* Target pre elements within outputs only */
+.thebelab-output pre,
+.jp-OutputArea pre {
+  background-color: #0a0e12 !important;
+  color: #c9d1d9 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Error output styling */
+.thebelab-output .error,
+.thebelab-output .traceback,
+.thebelab-output:has(.error) {
+  background-color: #0f0a0a !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.thebelab-output .error,
+.thebelab-output .traceback {
+  color: #fca5a5 !important;
+}
+
+/* Output label */
+.thebelab-output::before {
+  content: 'Out [' attr(data-execution-count) ']';
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(16, 185, 129, 0.7);
+  margin-bottom: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Error output label */
+.thebelab-output:has(.error)::before,
+.thebelab-output:has(.traceback)::before {
+  color: rgba(239, 68, 68, 0.7);
+}
+
+/* Hide outputs until they have content */
+.thebelab-output:empty {
+  display: none !important;
+}
+
+/* Jupyter rendered text output */
+.jp-RenderedText,
+.jp-RenderedText pre {
+  background-color: #0a0e12 !important;
+  color: #c9d1d9 !important;
+}
+
+/* CodeMirror editor styling - override theme backgrounds to match app */
+.CodeMirror {
+  background-color: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border-secondary) !important;
+  border-radius: 8px !important;
+  font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+  font-size: 0.875rem !important;
+  height: auto !important;
+  padding: 0.5rem !important;
+}
+
+.CodeMirror-gutters {
+  background-color: var(--color-bg-tertiary) !important;
+  border-right: 1px solid var(--color-border-primary) !important;
+}
+
+.CodeMirror-linenumber {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Keep the cursor visible */
+.CodeMirror-cursor {
+  border-left: 2px solid var(--color-accent-primary) !important;
+}
+
+/* Thebe button styling */
+.thebelab-button {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  border: 1px solid transparent !important;
+  cursor: pointer !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.thebelab-run-button {
+  background-color: var(--color-accent-primary) !important;
+  color: white !important;
+  border-color: var(--color-accent-primary) !important;
+}
+
+.thebelab-run-button:hover {
+  background-color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+}
+
+.thebelab-run-button:disabled {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-tertiary) !important;
+  border-color: var(--color-border-primary) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.thebelab-restart-button {
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-secondary) !important;
+  border-color: var(--color-border-primary) !important;
+}
+
+.thebelab-restart-button:hover {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-border-secondary) !important;
+}
+
+/* Syntax highlighting for code blocks */
+.hljs {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+  padding: 1rem !important;
+  border-radius: 8px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.7 !important;
+  overflow-x: auto !important;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}

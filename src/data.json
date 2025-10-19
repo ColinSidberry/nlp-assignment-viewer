@@ -1,0 +1,41 @@
+{
+  "title": "Prefix Expansion",
+  "assignment": "assignment_1",
+  "week_assigned": 1,
+  "ml_stage": [
+    {
+      "name": "Data Prep",
+      "cell_id": "c8a63d33",
+      "substage": [
+        {
+            "name": "Cleaning",
+            "cell_id": "c8a63d33"
+        },
+        {
+            "name": "Tokenization",
+            "cell_id": "c8a63d33"
+        }
+      ]
+    },
+    {
+      "name": "Tokenization",
+      "cell_id": "c8a63d33"
+    },
+    {
+      "name": "Model Training",
+      "cell_id": "c8a63d33"
+    },
+    {
+      "name": "Autocomplete Prediction",
+      "cell_id": "8f88d040"
+    },
+    {
+      "name": "Test Examples",
+      "cell_id": "790e9d15"
+    },
+    {
+      "name": "Interactive Widget",
+      "cell_id": "dff5f361"
+    }
+  ]
+}
