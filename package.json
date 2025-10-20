@@ -22,7 +22,8 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.14",
-    "thebe": "^0.9.3"
+    "thebe": "^0.9.3",
+    "vercel": "^48.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
