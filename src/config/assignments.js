@@ -60,14 +60,109 @@ export const ASSIGNMENTS = {
     }
   },
 
-  // Future assignments can be added here:
-  // 'n-gram-models': {
-  //   id: 'assignment_2',
-  //   slug: 'n-gram-models',
-  //   title: 'N-Gram Language Models',
-  //   kernelUrl: import.meta.env.VITE_ASSIGNMENT_2_KERNEL_URL || 'http://localhost:8889',
-  //   ...
-  // }
+  'ngram-language-models': {
+    id: 'assignment_4',
+    slug: 'ngram-language-models',
+    title: 'N-gram Language Models',
+    description: 'Build probabilistic language models with smoothing and interpolation techniques',
+    week: 5,
+
+    // Notebook configuration
+    notebookUrl: '/assignments/assignment_4/assignment_4.ipynb',
+
+    // Kernel configuration
+    // Docker container includes nginx CORS proxy on port 8890 (avoiding conflict with assignment-1)
+    kernelUrl: import.meta.env.VITE_ASSIGNMENT_4_KERNEL_URL || 'http://localhost:8890',
+
+    // Table of Contents structure
+    toc: {
+      title: 'N-gram Language Models',
+      assignment: 'assignment_4',
+      week_assigned: 5,
+      ml_stage: [
+        {
+          name: 'Data Prep',
+          substage: [
+            {
+              name: 'Corpus Loading',
+              cell_id: 'cell-3',
+              type: 'code'
+            },
+            {
+              name: 'Vocabulary Building',
+              cell_id: 'cell-6',
+              type: 'code'
+            }
+          ]
+        },
+        {
+          name: 'Feature Extraction',
+          substage: [
+            {
+              name: 'N-gram Extraction',
+              cell_id: 'cell-3',
+              type: 'code'
+            },
+            {
+              name: 'Count Statistics',
+              cell_id: 'cell-3',
+              type: 'code'
+            }
+          ]
+        },
+        {
+          name: 'Model Training',
+          substage: [
+            {
+              name: 'Probability Estimation',
+              cell_id: 'cell-4',
+              type: 'code'
+            },
+            {
+              name: 'Smoothing (Laplace)',
+              cell_id: 'cell-6',
+              type: 'code'
+            },
+            {
+              name: 'Smoothing (Add-k)',
+              cell_id: 'cell-10',
+              type: 'code'
+            },
+            {
+              name: 'Interpolation',
+              cell_id: 'cell-12',
+              type: 'code'
+            }
+          ]
+        },
+        {
+          name: 'Evaluation & Fine-tuning',
+          substage: [
+            {
+              name: 'Perplexity',
+              cell_id: 'cell-8',
+              type: 'code'
+            },
+            {
+              name: 'Hyperparameter Tuning',
+              cell_id: 'cell-10',
+              type: 'code'
+            }
+          ]
+        },
+        {
+          name: 'Deployment & Inference',
+          substage: [
+            {
+              name: 'Pipeline Demo',
+              cell_id: 'cell-14',
+              type: 'code'
+            }
+          ]
+        }
+      ]
+    }
+  }
 };
 
 // Helper function to get assignment by slug
