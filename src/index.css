@@ -30,6 +30,9 @@
   -moz-osx-font-smoothing: grayscale;
 
   color-scheme: dark;
+
+  /* Override Thebe/JupyterLab CSS variables for better readability */
+  --jp-code-line-height: 1.7;
 }
 
 body {
@@ -247,4 +250,54 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-tertiary);
+}
+
+/* Fix line-height for markdown code blocks - more specific selectors to override prose */
+.prose .markdown-pre,
+.prose .markdown-code-block,
+.prose pre code {
+  line-height: 1.7 !important;
+}
+
+.prose .markdown-pre *,
+.prose .markdown-code-block *,
+.prose pre code * {
+  line-height: 1.7 !important;
+}
+
+/* Ensure spans within code blocks have proper spacing */
+.prose .markdown-pre span,
+.prose .markdown-code-block span,
+.prose pre code span,
+.prose pre span {
+  line-height: 1.7 !important;
+  display: inline !important;
+}
+
+/* Additional fallback for hljs highlighted code */
+.prose .hljs,
+.prose .hljs *,
+.prose pre .hljs,
+.prose code.hljs,
+code.hljs.language-python {
+  line-height: 1.7 !important;
+}
+
+/* Ensure pre elements containing hljs code also have proper line-height and expand to fit content */
+.prose pre,
+.prose pre.markdown-pre,
+pre.markdown-pre,
+.markdown-pre,
+.prose pre code,
+pre code.hljs,
+tt,
+code,
+kbd,
+samp,
+pre {
+  line-height: 1.7 !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: auto !important;
+  overflow-y: visible !important;
 }

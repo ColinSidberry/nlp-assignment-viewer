@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } f
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
+import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import 'codemirror/theme/material-palenight.css';
+import 'katex/dist/katex.min.css';
 
 const NotebookViewer = forwardRef(({ notebookUrl, kernelUrl }, ref) => {
   const containerRef = useRef(null);
@@ -269,8 +272,8 @@ const NotebookViewer = forwardRef(({ notebookUrl, kernelUrl }, ref) => {
       >
         <div className="prose prose-invert max-w-none">
           <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
             components={{
               h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-[var(--color-text-primary)] mb-4 mt-6 pb-2 border-b border-[var(--color-border-primary)]" {...props} />,
               h2: ({node, ...props}) => <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-3 mt-5" {...props} />,
@@ -280,8 +283,8 @@ const NotebookViewer = forwardRef(({ notebookUrl, kernelUrl }, ref) => {
               a: ({node, ...props}) => <a className="text-[var(--color-link)] hover:text-[var(--color-link-hover)] underline transition-colors" {...props} />,
               code: ({node, inline, ...props}) => inline
                 ? <code className="bg-[var(--color-bg-tertiary)] text-[var(--color-accent-primary)] px-1.5 py-0.5 rounded text-sm font-mono border border-[var(--color-border-primary)]" {...props} />
-                : <code className="block bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] p-4 rounded-lg overflow-x-auto font-mono text-sm border border-[var(--color-border-primary)]" {...props} />,
-              pre: ({node, ...props}) => <pre className="bg-[var(--color-bg-secondary)] rounded-lg overflow-x-auto mb-4 border border-[var(--color-border-primary)]" {...props} />,
+                : <code className="markdown-code-block block bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] p-4 rounded-lg overflow-x-auto font-mono text-sm border border-[var(--color-border-primary)]" {...props} />,
+              pre: ({node, ...props}) => <pre className="markdown-pre bg-[var(--color-bg-secondary)] rounded-lg overflow-x-auto mb-4 border border-[var(--color-border-primary)]" {...props} />,
               ul: ({node, ...props}) => <ul className="list-disc list-inside text-[var(--color-text-secondary)] mb-4 space-y-2" {...props} />,
               ol: ({node, ...props}) => <ol className="list-decimal list-inside text-[var(--color-text-secondary)] mb-4 space-y-2" {...props} />,
               li: ({node, ...props}) => <li className="leading-relaxed" {...props} />,
